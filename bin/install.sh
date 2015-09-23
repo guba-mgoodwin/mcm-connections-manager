@@ -13,12 +13,12 @@ if [ -z $userpriv ]
     exit 1
 fi
 
-install_dir="/usr/share/apps/mcm-connections-manager"
+install_dir="/opt/mcm-connections-manager"
 mcm_shell="${install_dir}/bin/mcm"
 
 echo "1/3 Copying files to ${install_dir}"
 mkdir -p ${install_dir} 2>/dev/null
-cp -R * ${install_dir} 2>/dev/null
+cp -R ../* ${install_dir} 2>/dev/null
 
 echo "2/3 Creating symlinks"
 ln -fs ${mcm_shell}  /usr/bin/mcm

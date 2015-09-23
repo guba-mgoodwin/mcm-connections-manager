@@ -74,7 +74,7 @@ class ImportProgressDialog(object):
         import_count = 0
         existing_aliases = self.connections.get_aliases()
         with open(self.uri, 'rb') as csv_file:
-            csvreader = csv.DictReader(csv_file, fieldnames=mcm.common.connections.fields, dialect='mcm')
+            csvreader = csv.DictReader(csv_file, fieldnames=mcm.common.connections.fields, dialect='excel')
             for row in csvreader:
                 cx = mcm.common.connections.mapped_connections_factory(row)
                 if cx:
