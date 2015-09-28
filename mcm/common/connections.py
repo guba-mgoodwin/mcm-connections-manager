@@ -182,23 +182,23 @@ def connections_factory(cx_type, cx_user, cx_host, cx_alias,
     cx = None
     if cx_type == 'SSH':
         cx = Ssh(cx_user, cx_host, cx_alias, cx_password,
-                cx_port, cx_group, cx_options, cx_desc)
+                cx_port.__str__(), cx_group, cx_options, cx_desc)
 
     elif cx_type == 'VNC':
         cx = Vnc(cx_user, cx_host, cx_alias, cx_password,
-                cx_port, cx_group, cx_options, cx_desc)
+                cx_port.__str__(), cx_group, cx_options, cx_desc)
 
     elif cx_type == 'RDP':
         cx = Rdp(cx_user, cx_host, cx_alias, cx_password,
-                cx_port, cx_group, cx_options, cx_desc)
+                cx_port.__str__(), cx_group, cx_options, cx_desc)
 
     elif cx_type == 'TELNET':
         cx = Telnet(cx_user, cx_host, cx_alias, cx_password,
-                    cx_port, cx_group, cx_options, cx_desc)
+                cx_port.__str__(), cx_group, cx_options, cx_desc)
 
     elif cx_type == 'FTP':
         cx = Ftp(cx_user, cx_host, cx_alias, cx_password,
-                cx_port, cx_group, cx_options, cx_desc)
+                cx_port.__str__(), cx_group, cx_options, cx_desc)
 
     else:
         raise AttributeError("Unknown Connection Type: %s" % cx_type)
@@ -237,14 +237,14 @@ class ConnectionStore(object):
     def save(self):
         myfile = open(self.jsonfile, 'w')
         json.dump(self.store, myfile, cls=ConnectionEncoder,
-                  encoding="utf-8", separators=(',', ':'))
+                  encoding="utf-8", separators=(',', ':'), sort_keys=True, indent=4)
         myfile.close
 
     def save_to_file(self, filepath):
         try:
             myfile = open(filepath, 'w')
             json.dump(self.store, myfile, cls=ConnectionEncoder,
-                      encoding="utf-8", separators=(',', ':'))
+                      encoding="utf-8", separators=(',', ':'), sort_keys=True, indent=4)
             myfile.close
         except IOError:
             print "Failed to save to file %s" % filepath
